@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import 'package:flutter/widgets.dart';
+import 'package:base9/theme/spacing.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,11 +13,11 @@ class HomePage extends StatelessWidget {
 
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
         child: SizedBox(
           width: isDesktop ? width / 3 : width,
           child: Column(
-            spacing: 16,
+            spacing: Spacing.lg,
             mainAxisSize: MainAxisSize.min,
             children: [
               Column(
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                   const Icon(FIcons.star),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: Spacing.lg),
               FDateField(
                 label: const Text('Дата Рождения'),
                 description: const Text('Выберите дату рождения'),
