@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:base9/pages/home_page.dart';
 
 void main() {
   runApp(const Application());
@@ -12,6 +13,8 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = FThemes.zinc;
     return MaterialApp(
+      localizationsDelegates: FLocalizations.localizationsDelegates,
+      supportedLocales: FLocalizations.supportedLocales,
       theme: theme.light.toApproximateMaterialTheme(),
       darkTheme: theme.dark.toApproximateMaterialTheme(),
       themeMode: ThemeMode.system,
@@ -21,17 +24,7 @@ class Application extends StatelessWidget {
             : theme.light,
         child: child!,
       ),
-      home: FScaffold(
-        child: Center(
-          child: FButton(
-            style: FButtonStyle.outline(),
-            mainAxisSize: MainAxisSize.min,
-            onPress: () {},
-            suffix: Icon(FIcons.plus),
-            child: Text('Add'),
-          ),
-        ),
-      ),
+      home: const FScaffold(child: HomePage()),
     );
   }
 }
