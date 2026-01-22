@@ -17,3 +17,17 @@ final yearNumberSignal = computed<int?>(() {
   final date = dateOfBirthSignal.value;
   return date != null ? reduceToSingleDigit(date.year) : null;
 });
+
+final lifePathNumberSignal = computed<int?>(() {
+  final d = dayNumberSignal.value;
+  final m = monthNumberSignal.value;
+  final y = yearNumberSignal.value;
+
+  if (d == null || m == null || y == null) return null;
+
+  return calculateLifePath(d, m, y);
+});
+
+final naturalExpressionNumberSignal = computed<int?>(
+  () => dayNumberSignal.value,
+);

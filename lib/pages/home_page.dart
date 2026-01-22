@@ -4,6 +4,7 @@ import 'package:signals/signals_flutter.dart';
 import 'package:base9/theme/spacing.dart';
 import 'package:base9/signals.dart';
 import 'package:base9/widgets/date_analysis.dart';
+import 'package:base9/widgets/numbers_analysis.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -61,8 +62,10 @@ class HomePage extends StatelessWidget {
                 autofocus: true,
                 clearable: true,
               ),
-              const FDivider(),
+              const SizedBox(height: Spacing.lg),
               const DateAnalysis(),
+              const FDivider(),
+              const NumbersAnalysis(),
             ],
           ),
         ),
