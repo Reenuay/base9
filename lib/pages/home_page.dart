@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:signals/signals_flutter.dart';
 import 'package:base9/theme/spacing.dart';
+import 'package:base9/signals/date_of_birth_signal.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,6 +12,7 @@ class HomePage extends StatelessWidget {
     final breakpoints = context.theme.breakpoints;
     final width = MediaQuery.sizeOf(context).width;
     final isDesktop = width >= breakpoints.md;
+    final dateOfBirth = dateOfBirthSignal.watch(context);
 
     return Center(
       child: Padding(
@@ -46,10 +49,14 @@ class HomePage extends StatelessWidget {
                   const Icon(FIcons.star),
                 ],
               ),
-              SizedBox(height: Spacing.lg),
+              const SizedBox(height: Spacing.lg),
               FDateField(
                 label: const Text('Дата Рождения'),
                 description: const Text('Выберите дату рождения'),
+                control: FDateFieldControl.lifted(
+                  date: dateOfBirth,
+                  onChange: (value) => dateOfBirthSignal.value = value,
+                ),
                 autofocus: true,
                 clearable: true,
               ),
