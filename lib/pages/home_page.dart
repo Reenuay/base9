@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:signals/signals_flutter.dart';
 import 'package:base9/theme/spacing.dart';
-import 'package:base9/signals/date_of_birth_signal.dart';
+import 'package:base9/signals.dart';
+import 'package:base9/widgets/date_analysis.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -61,6 +62,7 @@ class HomePage extends StatelessWidget {
                 clearable: true,
               ),
               const FDivider(),
+              const DateAnalysis(),
             ],
           ),
         ),
