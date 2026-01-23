@@ -41,6 +41,9 @@ class _NumberCard extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1,
       child: FCard.raw(
+        style: (style) => style.copyWith(
+          decoration: style.decoration.copyWith(color: theme.colors.barrier),
+        ),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
