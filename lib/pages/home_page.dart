@@ -16,58 +16,51 @@ class HomePage extends StatelessWidget {
     final isDesktop = width >= breakpoints.md;
     final dateOfBirth = dateOfBirthSignal.watch(context);
 
-    return Center(
+    return FractionallySizedBox(
+      widthFactor: isDesktop ? 1 / 3 : 1,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Spacing.lg),
-        child: SizedBox(
-          width: isDesktop ? width / 3 : width,
-          child: Column(
-            spacing: Spacing.lg,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'BASE',
-                        style: context.theme.typography.xl7.copyWith(
-                          fontWeight: FontWeight.w900,
-                          height: 1,
-                        ),
-                      ),
-                      Text(
-                        '9',
-                        style: context.theme.typography.xl4.copyWith(
-                          fontWeight: FontWeight.w900,
-                          height: 1,
-                        ),
-                      ),
-                    ],
+        padding: const EdgeInsets.all(Spacing.lg),
+        child: Column(
+          spacing: Spacing.lg,
+          children: [
+            const SizedBox(height: Spacing.x3l),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'BASE',
+                  style: context.theme.typography.xl7.copyWith(
+                    fontWeight: FontWeight.w900,
+                    height: 1,
                   ),
-                  const Icon(FIcons.star),
-                ],
-              ),
-              const SizedBox(height: Spacing.lg),
-              FDateField(
-                label: const Text('Дата Рождения'),
-                description: const Text('Выберите дату рождения'),
-                control: FDateFieldControl.lifted(
-                  date: dateOfBirth,
-                  onChange: (value) => dateOfBirthSignal.value = value,
                 ),
-                autofocus: true,
-                clearable: true,
+                Text(
+                  '9',
+                  style: context.theme.typography.xl4.copyWith(
+                    fontWeight: FontWeight.w900,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+            const Icon(FIcons.star),
+            const SizedBox(height: Spacing.lg),
+            FDateField(
+              label: const Text('Дата Рождения'),
+              description: const Text('Выберите дату рождения'),
+              control: FDateFieldControl.lifted(
+                date: dateOfBirth,
+                onChange: (value) => dateOfBirthSignal.value = value,
               ),
-              const SizedBox(height: Spacing.lg),
-              const DateAnalysis(),
-              const FDivider(),
-              const NumbersAnalysis(),
-            ],
-          ),
+              autofocus: true,
+              clearable: true,
+            ),
+            const SizedBox(height: Spacing.lg),
+            const DateAnalysis(),
+            const FDivider(),
+            const NumbersAnalysis(),
+          ],
         ),
       ),
     );

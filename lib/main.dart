@@ -24,7 +24,7 @@ class Application extends StatelessWidget {
             : theme.light,
         child: child!,
       ),
-      home: const FScaffold(child: HomePage()),
+      home: const FScaffold(childPad: false, child: HomePage()),
     );
   }
 }
