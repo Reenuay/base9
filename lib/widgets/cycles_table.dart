@@ -95,7 +95,7 @@ class CyclesTable extends StatelessWidget {
           style.copyWith(color: context.theme.colors.primary),
         ),
         _cell(
-          problem.toString(),
+          problem != 0 ? problem.toString() : '-',
           style.copyWith(color: context.theme.colors.error),
         ),
       ],
