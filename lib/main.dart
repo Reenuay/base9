@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:upgrader/upgrader.dart';
+import 'package:version/version.dart';
 import 'package:base9/pages/home_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Only call clearSavedSettings() during testing to reset upgrader.
+  // await Upgrader.clearSavedSettings();
   runApp(const Application());
 }
 
@@ -24,7 +29,20 @@ class Application extends StatelessWidget {
             : theme.light,
         child: FToaster(child: child!),
       ),
-      home: const FScaffold(childPad: false, child: HomePage()),
+      home: UpgradeAlert(
+        upgrader: Upgrader(
+          storeController: UpgraderStoreController(
+            onAndroid: () => UpgraderAppcastStore(
+              appcastURL:
+                  'https://raw.githubusercontent.com/Reenuay/base9/main/appcast.xml',
+              osVersion: Version(1, 0, 0),
+            ),
+          ),
+          debugDisplayAlways: false,
+          debugLogging: true,
+        ),
+        child: const FScaffold(childPad: false, child: HomePage()),
+      ),
     );
   }
 }

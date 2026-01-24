@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   forui: ^0.17.0
   signals: ^6.3.0
+  upgrader: ^12.5.0
 
 dev_dependencies:
   flutter_test:
