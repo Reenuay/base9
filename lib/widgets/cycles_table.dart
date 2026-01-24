@@ -25,11 +25,6 @@ class CyclesTable extends StatelessWidget {
     final p3 = problem3Signal.watch(context);
     final p4 = problem4Signal.watch(context);
 
-    String? format(dynamic start, dynamic end) {
-      if (start == null || end == null) return null;
-      return '$start - $end';
-    }
-
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: theme.colors.border),
@@ -51,10 +46,10 @@ class CyclesTable extends StatelessWidget {
           ),
           children: [
             _header(context),
-            _row(context, 'I', 'Весна', format(1, e1), t1, p1),
-            _row(context, 'II', 'Лето', format(e1, e2), t2, p2),
-            _row(context, 'III', 'Осень', format(e2, e3), t3, p3),
-            _row(context, 'IV', 'Зима', format(e3, '∞'), t4, p4),
+            _row(context, 'I', 'Весна', '1 - $e1', t1, p1),
+            _row(context, 'II', 'Лето', '$e1 - $e2', t2, p2),
+            _row(context, 'III', 'Осень', '$e2 - $e3', t3, p3),
+            _row(context, 'IV', 'Зима', '$e3 - ∞', t4, p4),
           ],
         ),
       ),
@@ -82,9 +77,9 @@ class CyclesTable extends StatelessWidget {
     BuildContext context,
     String num,
     String season,
-    String? period,
-    int? task,
-    int? problem,
+    String period,
+    int task,
+    int problem,
   ) {
     final style = context.theme.typography.sm.copyWith(
       fontWeight: FontWeight.w500,
@@ -94,13 +89,13 @@ class CyclesTable extends StatelessWidget {
       children: [
         _cell(num, style),
         _cell(season, style),
-        _cell(period ?? '-', style),
+        _cell(period, style),
         _cell(
-          task?.toString() ?? '-',
+          task.toString(),
           style.copyWith(color: context.theme.colors.primary),
         ),
         _cell(
-          problem?.toString() ?? '-',
+          problem.toString(),
           style.copyWith(color: context.theme.colors.error),
         ),
       ],

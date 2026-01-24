@@ -6,8 +6,6 @@ import 'package:base9/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Only call clearSavedSettings() during testing to reset upgrader.
-  // await Upgrader.clearSavedSettings();
   runApp(const Application());
 }
 

@@ -52,15 +52,14 @@ class HomePage extends StatelessWidget {
                     const Icon(FIcons.star),
                     const SizedBox(height: Spacing.lg),
                     FDateField.calendar(
-                      key: ValueKey(dateOfBirth),
                       label: const Text('Дата Рождения'),
                       description: const Text('Выберите дату рождения'),
                       control: FDateFieldControl.lifted(
                         date: dateOfBirth,
-                        onChange: (value) => dateOfBirthSignal.value = value,
+                        onChange: (value) {
+                          if (value != null) dateOfBirthSignal.value = value;
+                        },
                       ),
-                      onReset: () => dateOfBirthSignal.value = null,
-                      clearable: true,
                     ),
                     const SizedBox(height: Spacing.xl),
                     const DateAnalysis(),

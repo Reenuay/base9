@@ -31,7 +31,7 @@ class NumbersAnalysis extends StatelessWidget {
 
 class _NumberCard extends StatelessWidget {
   final String label;
-  final int? value;
+  final int value;
 
   const _NumberCard({required this.label, required this.value});
 
@@ -48,7 +48,6 @@ class _NumberCard extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
                 label,
@@ -60,7 +59,7 @@ class _NumberCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                value?.toString() ?? '-',
+                value.toString(),
                 textAlign: TextAlign.center,
                 style: theme.typography.xl4.copyWith(
                   fontWeight: FontWeight.w900,

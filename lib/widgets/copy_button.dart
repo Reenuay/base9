@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
-import 'package:signals/signals_flutter.dart';
 import 'package:base9/signals.dart';
 
 class CopyButton extends StatefulWidget {
@@ -14,7 +13,6 @@ class CopyButton extends StatefulWidget {
 class _CopyButtonState extends State<CopyButton> {
   void _copy(BuildContext context) {
     final dob = dateOfBirthSignal.value;
-    if (dob == null) return;
 
     final text =
         '''
@@ -45,8 +43,6 @@ IV: ${endCycle3Signal.value} - ∞, Задача: ${task4Signal.value}, Проб
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final dateOfBirth = dateOfBirthSignal.watch(context);
-    if (dateOfBirth == null) return const SizedBox.shrink();
 
     return FTappable(
       onPress: () => _copy(context),
