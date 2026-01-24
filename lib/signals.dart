@@ -25,7 +25,7 @@ final lifePathNumberSignal = computed<int?>(() {
 
   if (d == null || m == null || y == null) return null;
 
-  return calculateLifePath(d, m, y);
+  return reduceToSingleDigit(d + m + y);
 });
 
 final naturalExpressionNumberSignal = computed<int?>(
