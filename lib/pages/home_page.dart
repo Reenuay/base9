@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                     ),
                     const Icon(FIcons.star),
                     const SizedBox(height: Spacing.lg),
-                    FDateField(
+                    FDateField.calendar(
                       label: const Text('Дата Рождения'),
                       description: const Text('Выберите дату рождения'),
                       control: FDateFieldControl.lifted(
