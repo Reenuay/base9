@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-pub-
 
       - name: Decode Keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/unformedvoid.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/unformedvoid.jks
 
       - name: Create key.properties
         run: |
