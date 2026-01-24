@@ -5,6 +5,7 @@ import 'package:base9/theme/spacing.dart';
 import 'package:base9/signals.dart';
 import 'package:base9/widgets/date_analysis.dart';
 import 'package:base9/widgets/numbers_analysis.dart';
+import 'package:base9/widgets/cycles_table.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -60,6 +61,8 @@ class HomePage extends StatelessWidget {
             const DateAnalysis(),
             const FDivider(),
             const NumbersAnalysis(),
+            const SizedBox(height: Spacing.xs),
+            const CyclesTable(),
           ],
         ),
       ),
