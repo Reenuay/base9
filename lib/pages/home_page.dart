@@ -23,66 +23,65 @@ class HomePage extends StatelessWidget {
         Center(
           child: FractionallySizedBox(
             widthFactor: isDesktop ? 1 / 3 : 1,
-            child: Padding(
-              padding: const EdgeInsets.all(Spacing.lg),
-              child: Column(
-                children: [
-                  const SizedBox(height: Spacing.x3l),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'BASE',
-                        style: context.theme.typography.xl7.copyWith(
-                          fontWeight: FontWeight.w900,
-                          height: 1,
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(Spacing.lg),
+                child: Column(
+                  children: [
+                    const SizedBox(height: Spacing.x3l),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'BASE',
+                          style: context.theme.typography.xl7.copyWith(
+                            fontWeight: FontWeight.w900,
+                            height: 1,
+                          ),
                         ),
-                      ),
-                      Text(
-                        '9',
-                        style: context.theme.typography.xl4.copyWith(
-                          fontWeight: FontWeight.w900,
-                          height: 1,
+                        Text(
+                          '9',
+                          style: context.theme.typography.xl4.copyWith(
+                            fontWeight: FontWeight.w900,
+                            height: 1,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const Icon(FIcons.star),
-                  const SizedBox(height: Spacing.lg),
-                  FDateField(
-                    label: const Text('Дата Рождения'),
-                    description: const Text('Выберите дату рождения'),
-                    control: FDateFieldControl.lifted(
-                      date: dateOfBirth,
-                      onChange: (value) => dateOfBirthSignal.value = value,
+                      ],
                     ),
-                    autofocus: true,
-                    clearable: true,
-                  ),
-                  const SizedBox(height: Spacing.lg),
-                  const DateAnalysis(),
-                  const SizedBox(height: Spacing.lg),
-                  const FDivider(),
-                  const Icon(FIcons.chevronDown),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: Spacing.lg),
-                          const NumbersAnalysis(),
-                          const SizedBox(height: Spacing.xl),
-                          const CyclesTable(),
-                        ],
+                    const Icon(FIcons.star),
+                    const SizedBox(height: Spacing.lg),
+                    FDateField(
+                      label: const Text('Дата Рождения'),
+                      description: const Text('Выберите дату рождения'),
+                      control: FDateFieldControl.lifted(
+                        date: dateOfBirth,
+                        onChange: (value) => dateOfBirthSignal.value = value,
                       ),
+                      autofocus: true,
+                      clearable: true,
                     ),
-                  ),
-                  const SizedBox(height: Spacing.lg),
-                  const CopyButton(),
-                ],
+                    const SizedBox(height: Spacing.lg),
+                    const DateAnalysis(),
+                    const SizedBox(height: Spacing.lg),
+                    const FDivider(),
+                    const Icon(FIcons.chevronDown),
+                    const SizedBox(height: Spacing.lg),
+                    const NumbersAnalysis(),
+                    const SizedBox(height: Spacing.xl),
+                    const CyclesTable(),
+                    const SizedBox(height: Spacing.xl * 3),
+                  ],
+                ),
               ),
             ),
           ),
+        ),
+        Positioned(
+          bottom: Spacing.xl,
+          left: 0,
+          right: 0,
+          child: const Center(child: CopyButton()),
         ),
       ],
     );
