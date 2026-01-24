@@ -4,9 +4,14 @@ import 'package:forui/forui.dart';
 import 'package:signals/signals_flutter.dart';
 import 'package:base9/signals.dart';
 
-class CopyButton extends StatelessWidget {
+class CopyButton extends StatefulWidget {
   const CopyButton({super.key});
 
+  @override
+  State<CopyButton> createState() => _CopyButtonState();
+}
+
+class _CopyButtonState extends State<CopyButton> {
   void _copy(BuildContext context) {
     final dob = dateOfBirthSignal.value;
     if (dob == null) return;
@@ -28,6 +33,13 @@ IV: ${endCycle3Signal.value} - ∞, Задача: ${task4Signal.value}, Проб
 ''';
 
     Clipboard.setData(ClipboardData(text: text));
+
+    showFToast(
+      context: context,
+      title: const Text('Скопировано!'),
+      alignment: FToastAlignment.topCenter,
+      duration: const Duration(seconds: 2),
+    );
   }
 
   @override

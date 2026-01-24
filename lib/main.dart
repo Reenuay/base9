@@ -22,7 +22,7 @@ class Application extends StatelessWidget {
         data: MediaQuery.platformBrightnessOf(context) == Brightness.dark
             ? theme.dark
             : theme.light,
-        child: child!,
+        child: FToaster(child: child!),
       ),
       home: const FScaffold(childPad: false, child: HomePage()),
     );
