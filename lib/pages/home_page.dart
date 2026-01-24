@@ -6,6 +6,7 @@ import 'package:base9/signals.dart';
 import 'package:base9/widgets/date_analysis.dart';
 import 'package:base9/widgets/numbers_analysis.dart';
 import 'package:base9/widgets/cycles_table.dart';
+import 'package:base9/widgets/copy_button.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,68 +18,73 @@ class HomePage extends StatelessWidget {
     final isDesktop = width >= breakpoints.md;
     final dateOfBirth = dateOfBirthSignal.watch(context);
 
-    return Center(
-      child: FractionallySizedBox(
-        widthFactor: isDesktop ? 1 / 3 : 1,
-        child: Padding(
-          padding: const EdgeInsets.all(Spacing.lg),
-          child: Column(
-            children: [
-              const SizedBox(height: Spacing.x3l),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: [
+        Center(
+          child: FractionallySizedBox(
+            widthFactor: isDesktop ? 1 / 3 : 1,
+            child: Padding(
+              padding: const EdgeInsets.all(Spacing.lg),
+              child: Column(
                 children: [
-                  Text(
-                    'BASE',
-                    style: context.theme.typography.xl7.copyWith(
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                    ),
-                  ),
-                  Text(
-                    '9',
-                    style: context.theme.typography.xl4.copyWith(
-                      fontWeight: FontWeight.w900,
-                      height: 1,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: Spacing.lg),
-              const Icon(FIcons.star),
-              const SizedBox(height: Spacing.lg),
-              FDateField(
-                label: const Text('Дата Рождения'),
-                description: const Text('Выберите дату рождения'),
-                control: FDateFieldControl.lifted(
-                  date: dateOfBirth,
-                  onChange: (value) => dateOfBirthSignal.value = value,
-                ),
-                autofocus: true,
-                clearable: true,
-              ),
-              const SizedBox(height: Spacing.lg),
-              const DateAnalysis(),
-              const SizedBox(height: Spacing.lg),
-              const FDivider(),
-              const Icon(FIcons.chevronDown),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
+                  const SizedBox(height: Spacing.x3l),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: Spacing.lg),
-                      const NumbersAnalysis(),
-                      const SizedBox(height: Spacing.xl),
-                      const CyclesTable(),
+                      Text(
+                        'BASE',
+                        style: context.theme.typography.xl7.copyWith(
+                          fontWeight: FontWeight.w900,
+                          height: 1,
+                        ),
+                      ),
+                      Text(
+                        '9',
+                        style: context.theme.typography.xl4.copyWith(
+                          fontWeight: FontWeight.w900,
+                          height: 1,
+                        ),
+                      ),
                     ],
                   ),
-                ),
+                  const Icon(FIcons.star),
+                  const SizedBox(height: Spacing.lg),
+                  FDateField(
+                    label: const Text('Дата Рождения'),
+                    description: const Text('Выберите дату рождения'),
+                    control: FDateFieldControl.lifted(
+                      date: dateOfBirth,
+                      onChange: (value) => dateOfBirthSignal.value = value,
+                    ),
+                    autofocus: true,
+                    clearable: true,
+                  ),
+                  const SizedBox(height: Spacing.lg),
+                  const DateAnalysis(),
+                  const SizedBox(height: Spacing.lg),
+                  const FDivider(),
+                  const Icon(FIcons.chevronDown),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: Spacing.lg),
+                          const NumbersAnalysis(),
+                          const SizedBox(height: Spacing.xl),
+                          const CyclesTable(),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: Spacing.lg),
+                  const CopyButton(),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
