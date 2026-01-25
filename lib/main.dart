@@ -36,7 +36,7 @@ class Application extends StatelessWidget {
               osVersion: Version(1, 0, 0),
             ),
           ),
-          debugDisplayAlways: false,
+          durationUntilAlertAgain: Duration.zero,
           debugLogging: true,
         ),
         child: const FScaffold(childPad: false, child: HomePage()),
