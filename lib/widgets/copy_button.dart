@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
+import 'package:base9/overlays/toast.dart';
 import 'package:base9/signals.dart';
 
 class CopyButton extends StatefulWidget {
@@ -32,12 +33,7 @@ IV: ${endCycle3Signal.value} - ∞, Задача: ${task4Signal.value}, Проб
 
     Clipboard.setData(ClipboardData(text: text));
 
-    showFToast(
-      context: context,
-      title: const Text('Скопировано!'),
-      alignment: FToastAlignment.topCenter,
-      duration: const Duration(seconds: 2),
-    );
+    context.showAppToast(title: const Text('Скопировано!'));
   }
 
   @override
