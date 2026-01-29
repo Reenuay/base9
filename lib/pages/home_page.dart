@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isDesktop) {
+    if (context.isWideScreen) {
       return const FractionallySizedBox(widthFactor: 1 / 3, child: _Scaffold());
     }
 
