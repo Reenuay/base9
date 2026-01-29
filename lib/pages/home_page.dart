@@ -7,6 +7,7 @@ import 'package:base9/widgets/date_analysis.dart';
 import 'package:base9/widgets/numbers_analysis.dart';
 import 'package:base9/widgets/cycles_table.dart';
 import 'package:base9/widgets/copy_button.dart';
+import 'package:base9/widgets/app_version.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,6 +21,11 @@ class HomePage extends StatelessWidget {
 
     return Stack(
       children: [
+        const Positioned(
+          top: 0,
+          left: 0,
+          child: SafeArea(child: AppVersion()),
+        ),
         Center(
           child: FractionallySizedBox(
             widthFactor: isDesktop ? 1 / 3 : 1,
