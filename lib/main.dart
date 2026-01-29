@@ -29,12 +29,15 @@ class Application extends StatelessWidget {
             ? theme.dark
             : theme.light,
         child: FToaster(
-          child: Padding(padding: MediaQuery.paddingOf(context), child: child!),
+          child: Padding(
+            padding: MediaQuery.paddingOf(context),
+            child: UpgradeCheck(
+              child: FScaffold(childPad: false, child: child!),
+            ),
+          ),
         ),
       ),
-      home: const UpgradeCheck(
-        child: FScaffold(childPad: false, child: HomePage()),
-      ),
+      home: const HomePage(),
     );
   }
 }
