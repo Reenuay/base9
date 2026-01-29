@@ -28,7 +28,9 @@ class Application extends StatelessWidget {
         data: MediaQuery.platformBrightnessOf(context) == Brightness.dark
             ? theme.dark
             : theme.light,
-        child: FToaster(child: child!),
+        child: FToaster(
+          child: Padding(padding: MediaQuery.paddingOf(context), child: child!),
+        ),
       ),
       home: const UpgradeCheck(
         child: FScaffold(childPad: false, child: HomePage()),
