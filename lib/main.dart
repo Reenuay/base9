@@ -6,11 +6,24 @@ import 'package:base9/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Upgrader.clearSavedSettings();
   runApp(const Application());
 }
 
 class Application extends StatelessWidget {
   const Application({super.key});
+
+  static final _upgrader = Upgrader(
+    storeController: UpgraderStoreController(
+      onAndroid: () => UpgraderAppcastStore(
+        appcastURL:
+            'https://raw.githubusercontent.com/Reenuay/base9/main/appcast.xml',
+        osVersion: Version(1, 0, 0),
+      ),
+    ),
+    durationUntilAlertAgain: Duration.zero,
+    debugLogging: true,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +41,7 @@ class Application extends StatelessWidget {
         child: FToaster(child: child!),
       ),
       home: UpgradeAlert(
-        upgrader: Upgrader(
-          storeController: UpgraderStoreController(
-            onAndroid: () => UpgraderAppcastStore(
-              appcastURL:
-                  'https://raw.githubusercontent.com/Reenuay/base9/main/appcast.xml',
-              osVersion: Version(1, 0, 0),
-            ),
-          ),
-          durationUntilAlertAgain: Duration.zero,
-          debugLogging: true,
-        ),
+        upgrader: _upgrader,
         child: const FScaffold(childPad: false, child: HomePage()),
       ),
     );
