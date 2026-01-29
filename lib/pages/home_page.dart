@@ -54,6 +54,8 @@ class HomePage extends StatelessWidget {
                     FDateField.calendar(
                       label: const Text('Дата Рождения'),
                       description: const Text('Выберите дату рождения'),
+                      anchor: Alignment.topCenter,
+                      fieldAnchor: Alignment.bottomCenter,
                       control: FDateFieldControl.lifted(
                         date: dateOfBirth,
                         onChange: (value) {
