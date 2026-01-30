@@ -3,10 +3,10 @@
     <channel>
         <title>Base9 Updates</title>
         <item>
-            <title>Version 0.7.0</title>
+            <title>Version 0.7.1</title>
             <sparkle:releaseNotesLink>https://github.com/Reenuay/base9/releases</sparkle:releaseNotesLink>
-            <enclosure url="https://github.com/Reenuay/base9/releases/download/v0.7.0/app-release.apk" 
-                       sparkle:version="0.7.0" 
+            <enclosure url="https://github.com/Reenuay/base9/releases/download/v0.7.1/app-release.apk" 
+                       sparkle:version="0.7.1" 
                        sparkle:os="android" />
         </item>
     </channel>
