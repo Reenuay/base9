@@ -1,8 +1,31 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:base9/theme/spacing.dart';
 import 'package:base9/overlays/toast.dart';
-import 'package:base9/overlays/update_install.dart';
+
+const _installChannel = MethodChannel('base9/install_apk');
+const _apkUrlPrefix = 'https://github.com/Reenuay/base9/releases/download';
+
+Future<bool> _downloadAndInstallApk(String version) async {
+  if (!Platform.isAndroid) return false;
+  final url = '$_apkUrlPrefix/v$version/app-release.apk';
+  try {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode != 200) return false;
+    final dir = await getTemporaryDirectory();
+    final file = File('${dir.path}/app-release-$version.apk');
+    await file.writeAsBytes(response.bodyBytes);
+    await _installChannel.invokeMethod<void>('installApk', {'path': file.path});
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
 
 extension UpdateDialogContext on BuildContext {
   void showUpdateDialog({
@@ -31,7 +54,7 @@ extension UpdateDialogContext on BuildContext {
           FButton(
             onPress: () async {
               Navigator.of(dialogContext).pop();
-              final ok = await downloadAndInstallApk(availableStr);
+              final ok = await _downloadAndInstallApk(availableStr);
               if (dialogContext.mounted && !ok) {
                 dialogContext.showAppToast(
                   title: const Text(
