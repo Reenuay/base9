@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:base9/theme/spacing.dart';
 import 'package:base9/overlays/toast.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-const _releasesPage = 'https://github.com/Reenuay/base9/releases';
+import 'package:base9/overlays/update_install.dart';
 
 extension UpdateDialogContext on BuildContext {
   void showUpdateDialog({
@@ -14,9 +12,6 @@ extension UpdateDialogContext on BuildContext {
     const unknown = 'неизвестна';
     final installedStr = installed.isEmpty ? unknown : installed;
     final availableStr = available.isEmpty ? unknown : available;
-    final url = available.isEmpty
-        ? _releasesPage
-        : '$_releasesPage/tag/v$availableStr';
 
     showDialog(
       context: this,
@@ -35,19 +30,14 @@ extension UpdateDialogContext on BuildContext {
         actions: [
           FButton(
             onPress: () async {
-              final launched = await launchUrl(
-                Uri.parse(url),
-                mode: LaunchMode.externalApplication,
-              );
-              if (dialogContext.mounted) {
-                Navigator.of(dialogContext).pop();
-                if (!launched) {
-                  dialogContext.showAppToast(
-                    title: const Text(
-                      'Не удалось открыть ссылку на обновление 😭',
-                    ),
-                  );
-                }
+              Navigator.of(dialogContext).pop();
+              final ok = await downloadAndInstallApk(availableStr);
+              if (dialogContext.mounted && !ok) {
+                dialogContext.showAppToast(
+                  title: const Text(
+                    'Не удалось скачать или установить обновление',
+                  ),
+                );
               }
             },
             child: const Text('Обновить'),
