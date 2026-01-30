@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 import 'package:base9/navigator_scope.dart';
 import 'package:base9/pages/home_page.dart';
-import 'package:base9/widgets/upgrade_check.dart';
+import 'package:base9/widgets/update_check.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class Application extends StatelessWidget {
           child: FToaster(
             child: Padding(
               padding: MediaQuery.paddingOf(context),
-              child: UpgradeCheck(
+              child: UpdateCheck(
                 child: FScaffold(childPad: false, child: child!),
               ),
             ),

@@ -1,7 +1,7 @@
 name: base9
 description: "A new Flutter project."
 publish_to: "none"
-version: 0.7.2
+version: 0.8.0
 
 environment:
   sdk: ^3.10.7
@@ -10,11 +10,12 @@ dependencies:
   flutter:
     sdk: flutter
   forui: ^0.17.0
+  http: ^1.2.0
   package_info_plus: ^9.0.0
   signals: ^6.3.0
-  upgrader: ^12.5.0
   url_launcher: ^6.3.0
   version: ^3.0.2
+  yaml: ^3.1.2
 
 dev_dependencies:
   flutter_test:
