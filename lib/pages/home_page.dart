@@ -16,22 +16,25 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isWideScreen) {
-      return const FractionallySizedBox(widthFactor: 1 / 3, child: _Scaffold());
-    }
-
-    return const _Scaffold();
-  }
-}
-
-class _Scaffold extends StatelessWidget {
-  const _Scaffold();
-
-  @override
-  Widget build(BuildContext context) {
     return Stack(
       children: [
-        const SingleChildScrollView(child: _Content()),
+        SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(Spacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppVersion(),
+                Center(
+                  child: FractionallySizedBox(
+                    widthFactor: context.isWideScreen ? 1 / 2 : 1,
+                    child: const _Content(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         Positioned(
           bottom: Spacing.lg,
           left: 0,
@@ -48,41 +51,37 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(Spacing.lg),
-      child: Column(
-        children: [
-          const Align(alignment: Alignment.centerLeft, child: AppVersion()),
-          const SizedBox(height: Spacing.x4l),
-          const Logo(),
-          const Icon(FIcons.star),
-          const SizedBox(height: Spacing.lg),
-          Watch((context) {
-            final dateOfBirth = dateOfBirthSignal.value;
-            return FDateField.calendar(
-              label: const Text('Дата Рождения'),
-              description: const Text('Выберите дату рождения'),
-              anchor: Alignment.topCenter,
-              fieldAnchor: Alignment.bottomCenter,
-              control: FDateFieldControl.lifted(
-                date: dateOfBirth,
-                onChange: (value) {
-                  if (value != null) dateOfBirthSignal.value = value;
-                },
-              ),
-            );
-          }),
-          const SizedBox(height: Spacing.xl),
-          const DateAnalysis(),
-          const FDivider(),
-          const Icon(FIcons.chevronDown),
-          const SizedBox(height: Spacing.lg),
-          const NumbersAnalysis(),
-          const SizedBox(height: Spacing.xl),
-          const CyclesTable(),
-          const SizedBox(height: Spacing.x4l),
-        ],
-      ),
+    return Column(
+      children: [
+        const SizedBox(height: Spacing.x4l),
+        const Logo(),
+        const Icon(FIcons.star),
+        const SizedBox(height: Spacing.lg),
+        Watch((context) {
+          final dateOfBirth = dateOfBirthSignal.value;
+          return FDateField.calendar(
+            label: const Text('Дата Рождения'),
+            description: const Text('Выберите дату рождения'),
+            anchor: Alignment.topCenter,
+            fieldAnchor: Alignment.bottomCenter,
+            control: FDateFieldControl.lifted(
+              date: dateOfBirth,
+              onChange: (value) {
+                if (value != null) dateOfBirthSignal.value = value;
+              },
+            ),
+          );
+        }),
+        const SizedBox(height: Spacing.xl),
+        const DateAnalysis(),
+        const FDivider(),
+        const Icon(FIcons.chevronDown),
+        const SizedBox(height: Spacing.lg),
+        const NumbersAnalysis(),
+        const SizedBox(height: Spacing.xl),
+        const CyclesTable(),
+        const SizedBox(height: Spacing.x4l),
+      ],
     );
   }
 }
