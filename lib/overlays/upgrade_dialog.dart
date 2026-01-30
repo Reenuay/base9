@@ -11,8 +11,9 @@ extension UpgraderDialog on Upgrader {
     String? installed,
     String? available,
   }) {
-    final installedStr = installed ?? 'неизвестна';
-    final availableStr = available ?? 'неизвестна';
+    const unknown = 'неизвестна';
+    final installedStr = installed ?? unknown;
+    final availableStr = available ?? unknown;
 
     showDialog(
       context: context,
