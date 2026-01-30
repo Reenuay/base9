@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:base9/navigator_scope.dart';
 import 'package:base9/pages/home_page.dart';
 import 'package:base9/widgets/upgrade_check.dart';
 
@@ -24,15 +25,18 @@ class Application extends StatelessWidget {
       theme: theme.light.toApproximateMaterialTheme(),
       darkTheme: theme.dark.toApproximateMaterialTheme(),
       themeMode: ThemeMode.system,
-      builder: (context, child) => FAnimatedTheme(
-        data: MediaQuery.platformBrightnessOf(context) == Brightness.dark
-            ? theme.dark
-            : theme.light,
-        child: FToaster(
-          child: Padding(
-            padding: MediaQuery.paddingOf(context),
-            child: UpgradeCheck(
-              child: FScaffold(childPad: false, child: child!),
+      builder: (context, child) => NavigatorKeyScope(
+        navigatorKey: navigatorKey,
+        child: FAnimatedTheme(
+          data: MediaQuery.platformBrightnessOf(context) == Brightness.dark
+              ? theme.dark
+              : theme.light,
+          child: FToaster(
+            child: Padding(
+              padding: MediaQuery.paddingOf(context),
+              child: UpgradeCheck(
+                child: FScaffold(childPad: false, child: child!),
+              ),
             ),
           ),
         ),

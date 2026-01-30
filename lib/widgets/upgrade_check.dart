@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:version/version.dart';
+import 'package:base9/navigator_scope.dart';
 import 'package:base9/overlays/upgrade_dialog.dart';
 
 const _appcastURL =
@@ -46,14 +47,21 @@ class _UpgradeCheckState extends State<UpgradeCheck> {
             state.versionInfo != null &&
             !_dialogShown &&
             UpgradeCheck._upgrader.shouldDisplayUpgrade()) {
-          _dialogShown = true;
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            UpgradeCheck._upgrader.showUpgradeDialog(
-              context,
-              installed: state.packageInfo?.version,
-              available: state.versionInfo?.appStoreVersion?.toString(),
-            );
-          });
+          final navKey = NavigatorKeyScope.of(context);
+          final navContext = navKey?.currentContext;
+          if (navContext != null && navContext.mounted) {
+            _dialogShown = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              final ctx = navKey?.currentContext;
+              if (ctx != null && ctx.mounted) {
+                UpgradeCheck._upgrader.showUpgradeDialog(
+                  ctx,
+                  installed: state.packageInfo?.version,
+                  available: state.versionInfo?.appStoreVersion?.toString(),
+                );
+              }
+            });
+          }
         }
         return widget.child;
       },
