@@ -3,15 +3,19 @@ import 'package:http/http.dart' as http;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:version/version.dart';
 import 'package:yaml/yaml.dart';
-import 'package:base9/navigator_scope.dart';
 import 'package:base9/overlays/update_dialog.dart';
 
 const _pubspecUrl =
     'https://raw.githubusercontent.com/Reenuay/base9/main/pubspec.yaml';
 
 class UpdateCheck extends StatefulWidget {
-  const UpdateCheck({super.key, required this.child});
+  const UpdateCheck({
+    super.key,
+    required this.navigatorKey,
+    required this.child,
+  });
 
+  final GlobalKey<NavigatorState> navigatorKey;
   final Widget child;
 
   @override
@@ -62,8 +66,7 @@ class _UpdateCheckState extends State<UpdateCheck> {
   @override
   Widget build(BuildContext context) {
     if (_pendingInstall != null && _pendingAvailable != null) {
-      final navKey = NavigatorKeyScope.of(context);
-      final ctx = navKey?.currentContext;
+      final ctx = widget.navigatorKey.currentContext;
       if (ctx != null && ctx.mounted) {
         final installed = _pendingInstall!;
         final available = _pendingAvailable!;
@@ -72,7 +75,7 @@ class _UpdateCheckState extends State<UpdateCheck> {
           _pendingAvailable = null;
         });
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          final c = navKey?.currentContext;
+          final c = widget.navigatorKey.currentContext;
           if (c != null && c.mounted) {
             c.showUpdateDialog(installed: installed, available: available);
           }
