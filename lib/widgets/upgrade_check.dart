@@ -19,6 +19,7 @@ class UpgradeCheck extends StatefulWidget {
       ),
     ),
     durationUntilAlertAgain: Duration.zero,
+    debugLogging: true,
   );
 
   @override
