@@ -3,7 +3,7 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
   build:
@@ -16,15 +16,15 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
-          cache: 'gradle'
+          distribution: "zulu"
+          java-version: "17"
+          cache: "gradle"
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.38.6'
-          channel: 'stable'
+          flutter-version: "3.38.6"
+          channel: "stable"
           cache: true
 
       - name: Cache Pub dependencies
@@ -66,32 +66,5 @@ jobs:
           name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update appcast.xml
-        run: |
-          VERSION=${GITHUB_REF_NAME#v}
-          URL="https://github.com/Reenuay/base9/releases/download/${GITHUB_REF_NAME}/app-release.apk"
-          
-          # Simple sed to update version and url in appcast.xml
-          sed -i "s|<title>Version .*</title>|<title>Version ${VERSION}</title>|g" appcast.xml
-          sed -i "s|sparkle:version=\".*\"|sparkle:version=\"${VERSION}\"|g" appcast.xml
-          sed -i "s|url=\".*\"|url=\"${URL}\"|g" appcast.xml
-
-      - name: Commit and push appcast.xml
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git checkout main
-          git pull origin main
-          git add appcast.xml
-          if git diff-index --quiet HEAD; then
-            echo "No changes to appcast.xml"
-          else
-            git commit -m "chore: update appcast.xml for ${GITHUB_REF_NAME}"
-            git push origin main
-          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
