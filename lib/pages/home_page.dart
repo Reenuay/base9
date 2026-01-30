@@ -9,6 +9,7 @@ import 'package:base9/widgets/numbers_analysis.dart';
 import 'package:base9/widgets/cycles_table.dart';
 import 'package:base9/widgets/copy_button.dart';
 import 'package:base9/widgets/app_version.dart';
+import 'package:base9/widgets/logo.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -53,26 +54,7 @@ class _Content extends StatelessWidget {
         children: [
           const Align(alignment: Alignment.centerLeft, child: AppVersion()),
           const SizedBox(height: Spacing.x4l),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'BASE',
-                style: context.theme.typography.xl7.copyWith(
-                  fontWeight: FontWeight.w900,
-                  height: 1,
-                ),
-              ),
-              Text(
-                '9',
-                style: context.theme.typography.xl4.copyWith(
-                  fontWeight: FontWeight.w900,
-                  height: 1,
-                ),
-              ),
-            ],
-          ),
+          const Logo(),
           const Icon(FIcons.star),
           const SizedBox(height: Spacing.lg),
           Watch((context) {
