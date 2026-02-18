@@ -29,12 +29,9 @@ class Application extends StatelessWidget {
             ? theme.dark
             : theme.light,
         child: FToaster(
-          child: Padding(
-            padding: MediaQuery.paddingOf(context),
-            child: UpdateCheck(
-              navigatorKey: navigatorKey,
-              child: FScaffold(childPad: false, child: child!),
-            ),
+          child: UpdateCheck(
+            navigatorKey: navigatorKey,
+            child: FScaffold(childPad: false, child: child!),
           ),
         ),
       ),

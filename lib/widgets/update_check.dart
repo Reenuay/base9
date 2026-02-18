@@ -41,7 +41,12 @@ class _UpdateCheckState extends State<UpdateCheck> {
       return;
     }
 
-    final response = await http.get(Uri.parse(_pubspecUrl));
+    final http.Response response;
+    try {
+      response = await http.get(Uri.parse(_pubspecUrl));
+    } catch (_) {
+      return;
+    }
     if (response.statusCode != 200) return;
 
     final yaml = loadYaml(response.body) as YamlMap?;

@@ -7,8 +7,6 @@ import 'package:base9/signals.dart';
 import 'package:base9/widgets/date_analysis.dart';
 import 'package:base9/widgets/numbers_analysis.dart';
 import 'package:base9/widgets/cycles_table.dart';
-import 'package:base9/widgets/copy_button.dart';
-import 'package:base9/widgets/app_version.dart';
 import 'package:base9/widgets/logo.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,32 +14,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(Spacing.lg),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppVersion(),
-                Center(
-                  child: FractionallySizedBox(
-                    widthFactor: context.isWideScreen ? 1 / 2 : 1,
-                    child: const _Content(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: Spacing.lg,
-          left: 0,
-          right: 0,
-          child: const Center(child: CopyButton()),
-        ),
-      ],
+    return Center(
+      child: FractionallySizedBox(
+        widthFactor: context.isWideScreen ? 1 / 2 : 1,
+        child: const _Content(),
+      ),
     );
   }
 }
